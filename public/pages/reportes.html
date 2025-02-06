@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Pagos</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/pages/menu.html">Inicio</a></li>
+                <li><a href="/pages/ingoperacion.html">Ingreso de Operación</a></li>
+                <li><a href="/pages/cuentas.html">Cuentas</a></li>
+                <li><a href="/pages/movimientos.html">Movimientos</a></li>
+                <li><a href="/pages/estadocuentas.html">Estado de Cuentas</a></li>
+                <li><a href="/pages/reportes.html">Reportes</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Reporte de Pagos</h2>
+        <div class="reporte-flex">
+            <form id="formReporte" class="form-container">
+                <label for="mes">Mes:</label>
+                <input type="text" id="mes" name="mes" placeholder="MM" required>
+                <label for="anio">Año:</label>
+                <input type="text" id="anio" name="anio" placeholder="YYYY" required>
+                <button type="submit">Consultar</button>
+            </form>
+            
+            <div class="reporte-container">
+                <table id="tablaReporte">
+                    <thead>
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Aquí se insertarán los datos dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/reportes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <footer>
+        <p>&copy; 2025 Pretoriano</p>
+    </footer>
+</body>
+</html>

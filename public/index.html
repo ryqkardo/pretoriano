@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Formulario de Acceso</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+    <!-- Incluye SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div id="contenedor">
+        <div id="contenedorcentrado">
+            <div id="login">
+                <form id="loginform">
+                    <label for="usuario">Usuario</label>
+                    <input id="usuario" type="text" name="usuario" placeholder="Usuario" required>
+                    
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" placeholder="Contraseña" name="password" required>
+                    
+                    <button type="submit" title="Ingresar" name="Ingresar">Login</button>
+                </form>
+            </div>
+            <div id="derecho">
+                <div class="titulo">Bienvenido</div>
+                <hr>
+                <div class="pie-form">
+                    <a href="#" id="lostPassword">¿Perdiste tu contraseña?</a>
+                    <a href="#" id="noAccount">¿No tienes Cuenta? Registrate</a>
+                    <hr>
+                    <a href="#" id="goBack">« Volver</a>
+                </div>
+                
+                <script>
+                    // Mensaje para "¿Perdiste tu contraseña?"
+                    document.getElementById('lostPassword').addEventListener('click', function(event) {
+                        event.preventDefault(); // Evita que el enlace redirija
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Haz Memoria',
+                            text: 'Debes tener mas cuidado y no olvidar las cosas',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    });
+                
+                    // Mensaje para "¿No tienes Cuenta? Registrate"
+                    document.getElementById('noAccount').addEventListener('click', function(event) {
+                        event.preventDefault(); // Evita que el enlace redirija
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Registro de cuenta',
+                            text: 'No creo que merezcas una cuenta, preguntale al administrador',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    });
+                
+                    // Mensaje para "« Volver"
+                    document.getElementById('goBack').addEventListener('click', function(event) {
+                        event.preventDefault(); // Evita que el enlace redirija
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Volver',
+                            text: 'Olvida el pasado, ¡no vuelvas!',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incluye SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('loginform').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
+
+            const usuario = document.getElementById('usuario').value;
+            const password = document.getElementById('password').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: usuario, password: password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Redirige a menu.html si el login es exitoso
+                    window.location.href = '../pages/menu.html';
+                } else {
+                    // Muestra un SweetAlert2 si las credenciales son incorrectas
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Credenciales incorrectas. Por favor, inténtalo de nuevo.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Muestra un SweetAlert2 si hay un error en el servidor
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al conectarse con el servidor. Por favor, inténtalo más tarde.',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

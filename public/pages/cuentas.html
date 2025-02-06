@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saldos de Tarjetas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/pages/menu.html">Inicio</a></li>
+                <li><a href="/pages/ingoperacion.html">Ingreso de Operación</a></li>
+                <li><a href="/pages/cuentas.html">Cuentas</a></li>
+                <li><a href="/pages/movimientos.html">Movimientos</a></li>
+                <li><a href="/pages/estadocuentas.html">Estado de Cuentas</a></li>
+                <li><a href="/pages/reportes.html">Reportes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 id="saldostarjetas" >Saldos de Tarjetas</h1>
+
+        <button id="grabarCarteraBtn">Grabar Cartera</button>
+
+
+    <div class="tablas-container">
+        <!-- Tabla para Banco Chile -->
+        <div class="tabla-saldo">
+            <h2>Banco Chile</h2>
+            <table id="banco-chile">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se llenarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tabla para Banco Falabella -->
+        <div class="tabla-saldo">
+            <h2>Banco Falabella</h2>
+            <table id="banco-falabella">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se llenarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tabla para Lider BCI -->
+        <div class="tabla-saldo">
+            <h2>Lider BCI</h2>
+            <table id="lider-bci">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se llenarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tabla para Tenpo -->
+        <div class="tabla-saldo">
+            <h2>Tenpo</h2>
+            <table id="tenpo">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se llenarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/cuentas.js"></script>
+
+    <footer>
+        <p>&copy; 2025 Pretoriano</p>
+    </footer>
+
+</body>
+</html>

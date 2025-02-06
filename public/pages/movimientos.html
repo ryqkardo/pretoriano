@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimientos</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="icon" href="../images/pretoriano.ico" type="image/x-icon">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/pages/menu.html">Inicio</a></li>
+                <li><a href="/pages/ingoperacion.html">Ingreso de Operación</a></li>
+                <li><a href="/pages/cuentas.html">Cuentas</a></li>
+                <li><a href="/pages/movimientos.html">Movimientos</a></li>
+                <li><a href="/pages/estadocuentas.html">Estado de Cuentas</a></li>
+                <li><a href="/pages/reportes.html">Reportes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 id="movimientos-title">Movimientos</h1>
+
+         <!-- Campo de búsqueda -->
+    <div class="filtro-container">
+        <input type="text" id="filtro-input" placeholder="Buscar por número de orden, responsable, modalidad, etc.">
+    </div>
+
+        <div class="recuadro">
+            <table id="tabla-movimientos">
+                <thead>
+                    <tr>
+                        <th>N° Orden</th>
+                        <th>Responsable</th>
+                        <th>Modalidad</th>
+                        <th>Tarjeta</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                        <th>Observación</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Datos insertados dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../js/movimientos.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <footer>
+        <p>&copy; 2025 Pretoriano</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="../css/style.css">    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de Operaciones</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/pages/menu.html">Inicio</a></li>
+                <li><a href="/pages/ingoperacion.html">Ingreso de Operación</a></li>
+                <li><a href="/pages/cuentas.html">Cuentas</a></li>
+                <li><a href="/pages/movimientos.html">Movimientos</a></li>
+                <li><a href="/pages/estadocuentas.html">Estado de Cuentas</a></li>
+                <li><a href="/pages/reportes.html">Reportes</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="form-container">
+        <h1>Ingreso de Operación</h1>
+
+        <form id="myForm" autocomplete="off">
+
+            <label for="rut">Rut:</label>
+            <select id="rut" name="rut" required>
+                <option value="" disabled selected>Seleccione un Rut</option>
+                <option value="17650547">17650547</option>
+                <option value="19994712">19994712</option>
+            </select>
+
+            <div class="container">
+                <label for="codCobPag">Código Cobranza:</label>
+                <input type="text" id="codCobPag" name="codCobPag" placeholder="Seleccionar código de cobro" required 
+                       oninput="filtrarOpciones('codigo-lista', this.value)"
+                       onclick="document.getElementById('codigo-lista').style.display = 'block'; getCodigosCobro();">
+                
+                <label for="codigo-lista" class="sr-only">Lista de códigos de cobranza</label>
+                <select id="codigo-lista" aria-label="Lista de códigos de cobranza" size="5" 
+                        onchange="document.getElementById('codCobPag').value = this.value; this.style.display = 'none';">
+                </select>
+            </div>
+
+            <label for="mntCob">Monto Cobrado:</label>
+            <input type="number" id="mntCob" name="mntCob" required>
+
+            <label for="obsOrd">Observación:</label>
+            <input type="text" id="obsOrd" name="obsOrd" required>
+
+            <div class="container">
+                <label for="codMtv">Código Motivo:</label>
+                <input type="text" id="codMtv" name="codMtv" placeholder="Seleccionar código de motivo" required 
+                       oninput="filtrarOpciones('motivo-lista', this.value)"
+                       onclick="document.getElementById('motivo-lista').style.display = 'block'; getCodigosMotivo();">
+                
+                <label for="motivo-lista" class="sr-only">Lista de códigos de motivo</label>
+                <select id="motivo-lista" aria-label="Lista de códigos de motivo" size="5" 
+                        onchange="document.getElementById('codMtv').value = this.value; this.style.display = 'none';">
+                </select>
+            </div>
+
+            <label for="fecRea">Fecha Realización:</label>
+            <input type="date" id="fecRea" name="fecRea"><br><br>
+
+            <button type="submit">Enviar</button>
+            <button type="button" id="cancelar-btn">Cancelar</button>
+
+        </form>
+
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Resultado</h2>
+            <p id="modalMessage">Mensaje de éxito o error</p>
+            <button onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="../js/ingoperacion.js" defer></script>
+
+    <footer>
+        <p>&copy; 2025 Pretoriano</p>
+    </footer>
+</body>
+</html>

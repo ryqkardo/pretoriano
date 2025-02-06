@@ -1,0 +1,751 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Cambiado a min-height para asegurar que el contenido se centre correctamente */
+}
+
+/* Contenedor del formulario */
+.form-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  margin: 20px auto; /* Centrado automático */
+  max-height: calc(100vh - 150px); /* Establece una altura máxima basada en la altura de la ventana */
+  overflow-y: auto; /* Permite desplazamiento en caso de que el formulario sea más grande que el espacio disponible */
+  padding-top: 50px; /* Asegura que haya espacio entre el formulario y el menú */
+  padding-bottom: 50px; /* Asegura que haya espacio entre el formulario y el footer */
+}
+
+/* Espaciado adicional entre elementos */
+.form-container {
+  background: #fff;
+  padding: 15px; /* Reducido el padding */
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+  width: 90%; 
+  max-width: 500px; /* Reducido el ancho máximo */
+  text-align: center;
+  margin: 20px auto; /* Centrado automático */
+  max-height: calc(100vh - 100px); /* Reducido el max-height */
+  overflow-y: auto;
+}
+
+/* Espaciado adicional entre elementos */
+.form-container label {
+  text-align: left;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px; /* Reducido el tamaño de la fuente de las etiquetas */
+}
+
+.form-container input,
+.form-container select {
+  font-size: 14px; /* Reducido el tamaño de la fuente en inputs y selects */
+  padding: 10px; /* Reducido el padding */
+  width: 100%; 
+  box-sizing: border-box;
+  margin-bottom: 12px; /* Reducido el margen entre los inputs */
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  .form-container {
+    width: 100%; 
+    padding: 10px; /* Menos padding en pantallas pequeñas */
+    margin: 10px;
+  }
+
+  .form-container label {
+    font-size: 13px; /* Reducido el tamaño de la fuente para pantallas pequeñas */
+  }
+
+  .form-container input,
+  .form-container select {
+    font-size: 13px; /* Reducido el tamaño de la fuente en inputs y selects */
+  }
+}
+
+
+
+/* Título */
+h1 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilos para etiquetas */
+label {
+  display: block;
+  font-weight: bold;
+  margin: 10px 0 5px;
+  text-align: left;
+}
+
+/* Estilos renovados para los inputs y selects */
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease-in-out;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto cuando el usuario hace foco en el input */
+input:focus, select:focus {
+  border-color: #28a745; /* Verde suave */
+  background-color: #fff;
+  box-shadow: 0px 0px 8px rgba(40, 167, 69, 0.3);
+  outline: none;
+}
+
+/* Opcional: Cambia el color del placeholder */
+input::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/* Estilo adicional para los select */
+select {
+  cursor: pointer;
+  appearance: none; /* Quita la flecha predeterminada */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23888" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); 
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 30px;
+}
+
+#cancelar-btn {
+  background: #dc3545; /* Rojo */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 15px;
+  width: 100%;
+}
+
+#cancelar-btn:active {
+  transform: scale(0.95);
+}
+
+#cancelar-btn:hover {
+  background: #c82333;
+}
+
+/* Contenedor del código de cobranza */
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Caja de códigos de cobro */
+#codigo-lista, #motivo-lista {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+/* Estilo para las opciones filtradas */
+#codigo-lista option, #motivo-lista option {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+#codigo-lista option[style="display: block;"], #motivo-lista option[style="display: block;"] {
+  display: block; /* Mostrar solo las opciones visibles */
+}
+
+/* Efecto hover en opciones */
+#codigo-lista option:hover, #motivo-lista option:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Botón de enviar */
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 15px;
+  width: 100%;
+}
+
+/* Efecto hover en el botón */
+button:hover {
+  background: #0056b3;
+}
+
+/* Accesibilidad - Ocultar visualmente pero mantener accesible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Modal styles */
+.modal {
+  display: none; 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.modal-content {
+  background: white; 
+  padding: 20px; 
+  border-radius: 10px; 
+  width: 90%; /* Ajusta el ancho del modal al 90% del contenedor padre */
+  max-width: 400px; /* Establece un ancho máximo para pantallas grandes */
+}
+
+/* Media queries para ajustes adicionales en pantallas pequeñas */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  input, select {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  #cancelar-btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  input, select {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  #cancelar-btn {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+/* Estilos de la barra de menus******** */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 15px;
+  overflow: hidden;
+}
+
+nav ul li a {
+  display: block;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+}
+
+nav ul li a::before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.3s ease-in-out;
+}
+
+nav ul li a:hover::before {
+  left: 0;
+}
+
+nav ul li a:hover {
+  transform: translateX(10px);
+}
+
+main {
+  padding: 80px 20px 20px; /* Ajuste para que el contenido no quede detrás del header */
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 2px 0; /* Reducir el padding vertical */
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  font-size: 12px; /* Reducir el tamaño de la fuente si es necesario */
+}
+/* Estilos de la barra de menus******** */
+
+
+
+/* Estilos generales de la pagina de movimiento*********** */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+#movimientos-title {
+  font-size: 26px;
+  color: #1a1a1a;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: left;
+}
+
+
+/* Estilos específicos para la tabla de movimientos */
+/* Estilos para el botón de eliminar */
+.eliminar-btn {
+  background: #dc3545; /* Rojo */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.eliminar-btn:hover {
+  background: #c82333; /* Rojo más oscuro al pasar el mouse */
+}
+
+/* Estilos para el recuadro */
+.recuadro {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  overflow-x: auto;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Estilos para la tabla */
+#tabla-movimientos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#tabla-movimientos th, #tabla-movimientos td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+#tabla-movimientos th {
+  background-color: #007bff;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#tabla-movimientos tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#tabla-movimientos tr:hover {
+  background-color: #ddd;
+}
+/* Fin Estilos generales de la pagina de movimiento*********** */
+
+/* Estilos para el contenedor del filtro */
+/* Estilos para el contenedor del filtro */
+.filtro-container {
+  margin-bottom: 30px;
+  text-align: center;
+  position: relative;
+}
+
+#filtro-input {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#filtro-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+#filtro-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.3);
+  background-color: #fff;
+  outline: none;
+}
+
+/* Estilos para el contenedor de las tablas */
+.tablas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  padding: 25px;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+/* Estilos para cada tabla de saldo */
+.tabla-saldo {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.tabla-saldo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.tabla-saldo h2 {
+  font-size: 22px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.tabla-saldo h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #007bff;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.tabla-saldo table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.tabla-saldo th, .tabla-saldo td {
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.tabla-saldo th {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tabla-saldo tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.tabla-saldo tr:hover {
+  background-color: #e9ecef;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Estilos para el título principal con ID saldostarjetas */
+#saldostarjetas {
+  font-size: 36px; /* Tamaño grande */
+  color: #2c3e50; /* Color oscuro y profesional */
+  text-align: center; /* Centrar el texto */
+  margin: 40px 0 30px; /* Espaciado superior e inferior */
+  font-weight: 700; /* Negrita */
+  text-transform: uppercase; /* Convertir texto a mayúsculas */
+  letter-spacing: 3px; /* Espaciado entre letras */
+  position: relative; /* Para el subrayado decorativo */
+  font-family: 'Arial', sans-serif; /* Fuente moderna */
+  padding: 30px;
+}
+
+
+/* Estilos para la tabla de estado de cuentas******************** */
+
+/* Estilo para el texto "PENDIENTE" */
+.texto-pendiente {
+  color: rgb(205, 93, 93) !important;
+  font-weight: bold; /* Opcional: Texto en negrita */
+}
+
+#tabla-estado-cuentas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 10px; /* Bordes redondeados */
+  overflow: hidden; /* Para que los bordes redondeados se apliquen correctamente */
+}
+
+#tabla-estado-cuentas th, #tabla-estado-cuentas td {
+  border: 1px solid #e0e0e0; /* Borde más suave */
+  padding: 15px;
+  text-align: left;
+}
+
+#tabla-estado-cuentas th {
+  background-color: #007bff; /* Color azul */
+  color: white;
+  font-weight: 600; /* Texto en negrita */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#tabla-estado-cuentas td {
+  background-color: #ffffff; /* Fondo blanco para las celdas */
+  color: #333; /* Color de texto oscuro */
+}
+
+#tabla-estado-cuentas tr:nth-child(even) {
+  background-color: #f8f9fa; /* Color de fondo alternativo más suave */
+}
+
+#tabla-estado-cuentas tr:hover {
+  background-color: #e9ecef; /* Color de fondo al pasar el mouse */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+/* Estilos para el encabezado de la página */
+h1 {
+  font-size: 28px;
+  color: #2c3e50; /* Color oscuro y profesional */
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700; /* Texto en negrita */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 2px; /* Espaciado entre letras */
+}
+
+/* Estilos para el contenedor de la tabla */
+.recuadro {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+/* Estilos para el botón "Grabar Cartera" */
+#grabarCarteraBtn {
+  background-color: #4CAF50; /* Verde principal */
+  color: white;
+  padding: 10px 20px; /* Ajuste de tamaño para mayor comodidad */
+  border: none;
+  border-radius: 8px; /* Bordes más suaves */
+  cursor: pointer;
+  font-size: 15px; /* Ligera mejora en tamaño de fuente */
+  margin-top: 10px; /* Espaciado refinado */
+  width: auto; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 600; /* Texto más elegante */
+  text-transform: uppercase; /* Letras en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Sombra sutil para profundidad */
+  transition: all 0.3s ease-in-out; /* Transiciones suaves */
+}
+
+#grabarCarteraBtn:hover {
+  background-color: #3e8e41; /* Verde más oscuro al pasar el mouse */
+  transform: translateY(-2px); /* Efecto de elevación */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Mayor profundidad */
+}
+
+#grabarCarteraBtn:active {
+  background-color: #368037; /* Verde más profundo al hacer clic */
+  transform: translateY(1px); /* Efecto de presión */
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Reducción de la sombra */
+}
+
+#textoversiculo {
+  font-family: 'Arial', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Estilo para el p */
+#versiculo {
+  font-family: 'Times New Roman', serif;
+  font-size: 20px;
+  color: #7f8c8d;
+  text-align: center;
+  font-style: italic;
+  margin-top: 0;
+}
+
+/* Estilos para la tabla de reportes */
+.reporte-flex {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.form-container {
+  flex: 1;
+  max-width: 300px;
+}
+
+.reporte-container {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#tablaReporte {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#tablaReporte th, #tablaReporte td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+#tablaReporte th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#tablaReporte tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#tablaReporte tr:hover {
+  background-color: #ddd;
+  transition: background-color 0.3s ease;
+}

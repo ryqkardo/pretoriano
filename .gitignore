@@ -1,0 +1,11 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar archivos de entorno
+.env
+
+# Ignorar configuración de VSCode
+.vscode/
+
+# Ignorar archivos de sistema
+.DS_Store
