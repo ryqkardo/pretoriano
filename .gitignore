@@ -9,3 +9,5 @@ node_modules/
 
 # Ignorar archivos de sistema
 .DS_Store
+
+Wallet_lamora/

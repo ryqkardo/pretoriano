@@ -1,19 +1,28 @@
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const oracledb = require('oracledb');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Puerto dinámico para Heroku
+const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(express.static('public'));
+// Crear la carpeta temporal para la Wallet
+const walletPath = path.join(__dirname, 'wallet');
+if (!fs.existsSync(walletPath)) {
+  fs.mkdirSync(walletPath);
+}
 
-// Middleware de depuración
-app.use((req, res, next) => {
-  console.log(`Solicitud recibida: ${req.url}`);
-  next();
-});
+// Decodificar la Wallet desde la variable de entorno
+const walletFile = path.join(walletPath, 'ewallet.p12');
+fs.writeFileSync(walletFile, Buffer.from(process.env.WALLET_BASE64, 'base64'));
 
-// Función para manejar la conexión a Oracle (sin initOracleClient)
+// Configurar Oracle para usar la Wallet
+oracledb.initOracleClient();
+process.env.TNS_ADMIN = walletPath;
+
 const connectToOracle = async () => {
   return oracledb.getConnection({
     user: process.env.DB_USER,
@@ -22,6 +31,23 @@ const connectToOracle = async () => {
   });
 };
 
+app.use(express.json());
+app.use(express.static('public'));
+
+// Prueba de conexión
+app.get('/test-db', async (req, res) => {
+  try {
+    const connection = await connectToOracle();
+    const result = await connection.execute('SELECT sysdate FROM dual');
+    await connection.close();
+    res.json({ success: true, date: result.rows[0] });
+  } catch (err) {
+    console.error('Error en conexión a Oracle:', err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/*
 // Función para formatear fechas
 const formatDate = (dateString) => {
   if (!dateString) return null;
@@ -402,8 +428,8 @@ app.get('/reporte', async (req, res) => {
       }
     }
   }
-});
+});*/
 
 
 // Iniciar el servidor
-app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
+app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
