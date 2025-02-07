@@ -1,27 +1,20 @@
 const express = require('express');
 const oracledb = require('oracledb');
-const dotenv = require('dotenv');
-dotenv.config();
 
 const app = express();
-const PORT = 3000;
-
-// Configurar Oracle Instant Client
-oracledb.initOracleClient({ libDir: "C:\\oracle\\instantclient_23_6" });  // Ruta correcta al Instant Client
-
+const PORT = process.env.PORT || 3000; // Puerto dinámico para Heroku
 
 app.use(express.json());
 app.use(express.static('public'));
 
-// Mensaje de depuración
+// Middleware de depuración
 app.use((req, res, next) => {
   console.log(`Solicitud recibida: ${req.url}`);
   next();
 });
 
-// Función para manejar la conexión a Oracle
+// Función para manejar la conexión a Oracle (sin initOracleClient)
 const connectToOracle = async () => {
-  process.env.TNS_ADMIN = "C:\\Oracle\\Wallet_lamora";
   return oracledb.getConnection({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -413,4 +406,4 @@ app.get('/reporte', async (req, res) => {
 
 
 // Iniciar el servidor
-app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
