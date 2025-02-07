@@ -9,32 +9,38 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Crear la carpeta temporal para la Wallet
+// Crear la carpeta temporal para la Wallet (en Heroku no debe ser persistente, solo temporal)
 const walletPath = path.join(__dirname, 'wallet');
 if (!fs.existsSync(walletPath)) {
   fs.mkdirSync(walletPath);
 }
 
-// Decodificar la Wallet desde la variable de entorno
+// Decodificar la Wallet desde la variable de entorno y escribir el archivo wallet.p12
 const walletFile = path.join(walletPath, 'ewallet.p12');
 fs.writeFileSync(walletFile, Buffer.from(process.env.WALLET_BASE64, 'base64'));
 
 // Configurar Oracle para usar la Wallet
-oracledb.initOracleClient();
+// En Heroku, el cliente Oracle se inicializa con el TNS_ADMIN apuntando a la carpeta donde está la wallet
+oracledb.initOracleClient({ libDir: '/app/.heroku/lib/oracle' });
 process.env.TNS_ADMIN = walletPath;
 
 const connectToOracle = async () => {
-  return oracledb.getConnection({
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    connectString: process.env.DB_CONNECTION_STRING,
-  });
+  try {
+    return await oracledb.getConnection({
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      connectString: process.env.DB_CONNECTION_STRING,
+    });
+  } catch (err) {
+    console.error('Error al conectar a la base de datos:', err);
+    throw err;
+  }
 };
 
 app.use(express.json());
 app.use(express.static('public'));
 
-// Prueba de conexión
+// Ruta para probar la conexión a Oracle
 app.get('/test-db', async (req, res) => {
   try {
     const connection = await connectToOracle();
@@ -42,10 +48,11 @@ app.get('/test-db', async (req, res) => {
     await connection.close();
     res.json({ success: true, date: result.rows[0] });
   } catch (err) {
-    console.error('Error en conexión a Oracle:', err);
+    console.error('Error en la conexión a Oracle:', err);
     res.status(500).json({ success: false, message: err.message });
   }
 });
+
 
 /*
 // Función para formatear fechas
